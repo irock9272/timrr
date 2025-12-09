@@ -9,19 +9,34 @@ h1 {
     height: 75vh;
 }
 
+:root {
+    /* Here Is The Place To Controll Blur Amount! (in px) */
+    --bg-blur: 6px;
+}
+
 body {
     background-color: rgb(0, 0, 0);
+    min-height: 100vh;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Place the background image in a pseudo-element so we can blur it
+   without blurring the page content. Change --bg-blur (located in :root) to control px. */
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0; /* top:0; right:0; bottom:0; left:0; */
     background-image: url('Images/wallpaper.png');
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
-    min-height: 100vh;
+    filter: blur(var(--bg-blur));
+    transform: scale(1.03);
+    z-index: -1;
+    pointer-events: none;
 }
 
 body::-webkit-scrollbar {
     display: none;
-}
-
-body {
-    overflow: hidden;
 }
